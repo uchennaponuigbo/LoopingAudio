@@ -14,18 +14,25 @@ namespace LoopingAudio
     public partial class formLoopAudio : Form
     {
         private WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+        private const int MaxMusicLengthSeconds = 3600;
         public formLoopAudio()
         {
             InitializeComponent();
             //player.controls.(properties and methods can be called here)
             buttonPlayOrStop.Text = "Play";
-            EnableControls();
+            trackBar1.Maximum = MaxMusicLengthSeconds;
+            EnableOrDisableControls();
         }
 
-        public void EnableControls()
+        public void EnableOrDisableControls(bool change = false)
         {
-            buttonReset.Enabled = false;
-            buttonPlayOrStop.Enabled = false;
+            trackBar1.Enabled = change;
+
+            buttonReset.Enabled = change;
+            buttonPlayOrStop.Enabled = change;
+            buttonGoToTimeStamp.Enabled = change;
+
+            textGoToTimeStamp.Enabled = change;
         }
 
         private void buttonPlayOrStop_Click(object sender, EventArgs e)
