@@ -21,19 +21,25 @@ namespace LoopingAudio
             //player.controls.(properties and methods can be called here)
             buttonPlayOrStop.Text = "Play";
             trackBar1.Maximum = MaxMusicLengthSeconds;
-            EnableOrDisableControls();
+            //EnableOrDisableControls();
+            //ShowOrHideTimestamps();
         }
 
-        public void EnableOrDisableControls(bool change = false)
+        public void EnableOrDisableControls(bool allowEdits = false)
         {
-            trackBar1.Enabled = change;
+            trackBar1.Enabled = allowEdits;
 
-            buttonReset.Enabled = change;
-            buttonPlayOrStop.Enabled = change;
-            buttonGoToTimeStamp.Enabled = change;
+            buttonReset.Enabled = allowEdits;
+            buttonPlayOrStop.Enabled = allowEdits;
+            buttonGoToTimeStamp.Enabled = allowEdits;
 
-            textGoToTimeStamp.Enabled = change;
+            textStartLoop.Enabled = allowEdits;
+            textEndLoop.Enabled = allowEdits;
+            textGoToTimeStamp.Enabled = allowEdits;
         }
+
+        private void ShowOrHideTimestamps(bool showLabels = false)
+            => labelStartLoop.Visible = labelEndLoop.Visible = showLabels;
 
         private void buttonPlayOrStop_Click(object sender, EventArgs e)
         {
@@ -53,6 +59,16 @@ namespace LoopingAudio
         private void openTrackToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonSetLoopPoints_Click(object sender, EventArgs e)
+        {
+            //if(Validator.IsNotEmpty(textStartLoop) && Validator.IsNotEmpty(textEndLoop))
+            //{
+
+            //}
+            ShowOrHideTimestamps(true);
+            textStartLoop.Text = textEndLoop.Text = "";
         }
     }
 
