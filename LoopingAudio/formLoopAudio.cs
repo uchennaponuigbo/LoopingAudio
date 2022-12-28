@@ -13,10 +13,39 @@ namespace LoopingAudio
     //https://learn.microsoft.com/en-us/previous-versions/windows/embedded/ms930695(v=msdn.10)?redirectedfrom=MSDN
     public partial class formLoopAudio : Form
     {
-        WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+        private WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
         public formLoopAudio()
         {
             InitializeComponent();
+            //player.controls.(properties and methods can be called here)
+            buttonPlayOrStop.Text = "Play";
+            EnableControls();
+        }
+
+        public void EnableControls()
+        {
+            buttonReset.Enabled = false;
+            buttonPlayOrStop.Enabled = false;
+        }
+
+        private void buttonPlayOrStop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            trackBar1.Value = 0;
+        }
+
+        private void saveCurrentTrackToDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openTrackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
