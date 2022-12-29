@@ -30,20 +30,21 @@ namespace LoopingAudio
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonPlayOrStop = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelCurrentTime = new System.Windows.Forms.Label();
+            this.labelEndTime = new System.Windows.Forms.Label();
+            this.labelStartTime = new System.Windows.Forms.Label();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textEndLoop = new System.Windows.Forms.TextBox();
             this.textStartLoop = new System.Windows.Forms.TextBox();
             this.buttonSetLoopPoints = new System.Windows.Forms.Button();
-            this.labelCurrentTime = new System.Windows.Forms.Label();
             this.textGoToTimeStamp = new System.Windows.Forms.TextBox();
             this.buttonGoToTimeStamp = new System.Windows.Forms.Button();
-            this.labelEndTime = new System.Windows.Forms.Label();
-            this.labelStartTime = new System.Windows.Forms.Label();
-            this.buttonReset = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTrackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +56,7 @@ namespace LoopingAudio
             this.labelStartLoop = new System.Windows.Forms.Label();
             this.labelEndLoop = new System.Windows.Forms.Label();
             this.buttonClearPoints = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -77,6 +79,7 @@ namespace LoopingAudio
             this.trackBar1.Size = new System.Drawing.Size(744, 56);
             this.trackBar1.TabIndex = 1;
             this.trackBar1.TickFrequency = 0;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // groupBox1
             // 
@@ -92,52 +95,6 @@ namespace LoopingAudio
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(106, 199);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 23);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Loop End Point";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(106, 165);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 23);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Loop Start Point";
-            // 
-            // textEndLoop
-            // 
-            this.textEndLoop.Location = new System.Drawing.Point(247, 199);
-            this.textEndLoop.MaxLength = 8;
-            this.textEndLoop.Name = "textEndLoop";
-            this.textEndLoop.Size = new System.Drawing.Size(66, 27);
-            this.textEndLoop.TabIndex = 11;
-            // 
-            // textStartLoop
-            // 
-            this.textStartLoop.Location = new System.Drawing.Point(246, 165);
-            this.textStartLoop.MaxLength = 8;
-            this.textStartLoop.Name = "textStartLoop";
-            this.textStartLoop.Size = new System.Drawing.Size(66, 27);
-            this.textStartLoop.TabIndex = 10;
-            // 
-            // buttonSetLoopPoints
-            // 
-            this.buttonSetLoopPoints.Location = new System.Drawing.Point(401, 164);
-            this.buttonSetLoopPoints.Name = "buttonSetLoopPoints";
-            this.buttonSetLoopPoints.Size = new System.Drawing.Size(75, 29);
-            this.buttonSetLoopPoints.TabIndex = 9;
-            this.buttonSetLoopPoints.Text = "Set";
-            this.buttonSetLoopPoints.UseVisualStyleBackColor = true;
-            this.buttonSetLoopPoints.Click += new System.EventHandler(this.buttonSetLoopPoints_Click);
-            // 
             // labelCurrentTime
             // 
             this.labelCurrentTime.AutoSize = true;
@@ -147,23 +104,6 @@ namespace LoopingAudio
             this.labelCurrentTime.Size = new System.Drawing.Size(83, 38);
             this.labelCurrentTime.TabIndex = 8;
             this.labelCurrentTime.Text = "29:59";
-            // 
-            // textGoToTimeStamp
-            // 
-            this.textGoToTimeStamp.Location = new System.Drawing.Point(612, 183);
-            this.textGoToTimeStamp.MaxLength = 6;
-            this.textGoToTimeStamp.Name = "textGoToTimeStamp";
-            this.textGoToTimeStamp.Size = new System.Drawing.Size(66, 27);
-            this.textGoToTimeStamp.TabIndex = 7;
-            // 
-            // buttonGoToTimeStamp
-            // 
-            this.buttonGoToTimeStamp.Location = new System.Drawing.Point(512, 171);
-            this.buttonGoToTimeStamp.Name = "buttonGoToTimeStamp";
-            this.buttonGoToTimeStamp.Size = new System.Drawing.Size(94, 51);
-            this.buttonGoToTimeStamp.TabIndex = 6;
-            this.buttonGoToTimeStamp.Text = "Go To Timestamp";
-            this.buttonGoToTimeStamp.UseVisualStyleBackColor = true;
             // 
             // labelEndTime
             // 
@@ -194,6 +134,73 @@ namespace LoopingAudio
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(106, 199);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 23);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Loop End Point";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(106, 165);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(132, 23);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Loop Start Point";
+            // 
+            // textEndLoop
+            // 
+            this.textEndLoop.Location = new System.Drawing.Point(247, 199);
+            this.textEndLoop.MaxLength = 8;
+            this.textEndLoop.Name = "textEndLoop";
+            this.textEndLoop.Size = new System.Drawing.Size(66, 27);
+            this.textEndLoop.TabIndex = 11;
+            this.textEndLoop.Tag = "Endpoint Textbox";
+            // 
+            // textStartLoop
+            // 
+            this.textStartLoop.Location = new System.Drawing.Point(246, 165);
+            this.textStartLoop.MaxLength = 8;
+            this.textStartLoop.Name = "textStartLoop";
+            this.textStartLoop.Size = new System.Drawing.Size(66, 27);
+            this.textStartLoop.TabIndex = 10;
+            this.textStartLoop.Tag = "StartPoint Textbox";
+            // 
+            // buttonSetLoopPoints
+            // 
+            this.buttonSetLoopPoints.Location = new System.Drawing.Point(401, 164);
+            this.buttonSetLoopPoints.Name = "buttonSetLoopPoints";
+            this.buttonSetLoopPoints.Size = new System.Drawing.Size(75, 29);
+            this.buttonSetLoopPoints.TabIndex = 9;
+            this.buttonSetLoopPoints.Text = "Set";
+            this.buttonSetLoopPoints.UseVisualStyleBackColor = true;
+            this.buttonSetLoopPoints.Click += new System.EventHandler(this.buttonSetLoopPoints_Click);
+            // 
+            // textGoToTimeStamp
+            // 
+            this.textGoToTimeStamp.Location = new System.Drawing.Point(612, 183);
+            this.textGoToTimeStamp.MaxLength = 6;
+            this.textGoToTimeStamp.Name = "textGoToTimeStamp";
+            this.textGoToTimeStamp.Size = new System.Drawing.Size(66, 27);
+            this.textGoToTimeStamp.TabIndex = 7;
+            this.textGoToTimeStamp.Tag = "TimeStamp Textbox";
+            // 
+            // buttonGoToTimeStamp
+            // 
+            this.buttonGoToTimeStamp.Location = new System.Drawing.Point(512, 171);
+            this.buttonGoToTimeStamp.Name = "buttonGoToTimeStamp";
+            this.buttonGoToTimeStamp.Size = new System.Drawing.Size(94, 51);
+            this.buttonGoToTimeStamp.TabIndex = 6;
+            this.buttonGoToTimeStamp.Text = "Go To Timestamp";
+            this.buttonGoToTimeStamp.UseVisualStyleBackColor = true;
+            this.buttonGoToTimeStamp.Click += new System.EventHandler(this.buttonGoToTimeStamp_Click);
             // 
             // menuStrip1
             // 
@@ -240,7 +247,7 @@ namespace LoopingAudio
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(62, 53);
+            this.label1.Location = new System.Drawing.Point(18, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 41);
             this.label1.TabIndex = 4;
@@ -248,11 +255,10 @@ namespace LoopingAudio
             // 
             // labelSongName
             // 
-            this.labelSongName.AutoSize = true;
             this.labelSongName.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSongName.Location = new System.Drawing.Point(456, 53);
+            this.labelSongName.Location = new System.Drawing.Point(208, 37);
             this.labelSongName.Name = "labelSongName";
-            this.labelSongName.Size = new System.Drawing.Size(233, 41);
+            this.labelSongName.Size = new System.Drawing.Size(554, 108);
             this.labelSongName.TabIndex = 5;
             this.labelSongName.Text = "SongName.mp3";
             // 
@@ -262,6 +268,7 @@ namespace LoopingAudio
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "mp3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
             this.openFileDialog1.Title = "Open mp3";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // labelStartLoop
             // 
@@ -291,6 +298,11 @@ namespace LoopingAudio
             this.buttonClearPoints.TabIndex = 16;
             this.buttonClearPoints.Text = "Clear";
             this.buttonClearPoints.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // formLoopAudio
             // 
@@ -353,5 +365,6 @@ namespace LoopingAudio
         private Label labelStartLoop;
         private Label labelEndLoop;
         private Button buttonClearPoints;
+        private Timer timer1;
     }
 }
